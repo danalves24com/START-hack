@@ -41,7 +41,7 @@ class cRegister extends Component {
 							</center>
 						</div>
 						<div class="py-5">
-							<div><a id="linkToShare"></a></div>
+							<div class="text-center"><a id="linkToShare"></a></div>
 						</div>
 					</div>
 				</div>					
