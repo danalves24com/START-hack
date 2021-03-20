@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct Coffee_TimeApp: App {
     
+    let mainModel = MainModel.shared 
+    
+    
     var body: some Scene {
         WindowGroup {
             MainScreen()
