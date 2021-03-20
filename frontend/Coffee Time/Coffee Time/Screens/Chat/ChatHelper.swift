@@ -16,8 +16,8 @@ class ChatHelper : ObservableObject {
     var m3 = Message(content: "what are you doing", user: User(name:"Thomas", isCurrentUser: true))
     var m4 = Message(content: "Nothing", user: User(name:"Paula", isCurrentUser: false))
     var m5 = Message(content: "You?", user: User(name:"Paula", isCurrentUser: false))
-    var didChange = PassthroughSubject<Void, Never>()
-    var messages:[Message]
+    //var didChange = PassthroughSubject<Void, Never>()
+    @Published var messages:[Message]
     init() {
         messages = [m1,m2,m3,m4,m5]
     }
@@ -27,6 +27,6 @@ class ChatHelper : ObservableObject {
     func sendMessage(_ chatMessage: Message) {
         //realTimeMessages.append(chatMessage)
         messages.append(chatMessage)
-        didChange.send(())
+        //didChange.send(())
     }
 }

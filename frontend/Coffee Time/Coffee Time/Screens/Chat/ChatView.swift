@@ -35,9 +35,9 @@ struct ChatView: View {
     }
     
     func sendMessage() {
-        typingMessage = "Hey"
+        
         chatHelper.sendMessage(Message(content: typingMessage, user: User(name:"me",isCurrentUser: true)))
-            
+        typingMessage = ""
         }
 }
 
