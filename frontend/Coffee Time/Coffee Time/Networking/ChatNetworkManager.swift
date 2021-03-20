@@ -26,6 +26,7 @@ class ChatNetworkManager {
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
+        send(s: "test authentication")
     }
 }
 
@@ -33,7 +34,11 @@ class ChatNetworkManager {
 extension ChatNetworkManager: WebSocketDelegate {
     
     func didReceive(event: WebSocketEvent, client: WebSocket) {
-        
+        //Handle json
+    }
+    
+    func send(s: String){
+        socket.write(string: s)
     }
 }
 
