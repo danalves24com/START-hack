@@ -3,6 +3,7 @@ const app = express();
 var mysql = require('mysql');
 var { Matcher } = require("./components/Matcher.js")
 var { companyAccountCreator } = require("./components/Signup-process.js")
+var {userSignup} = require("./components/userSignup.js");
 var pass = require("./config/pass.js")
 var con = mysql.createConnection({
   host: "localhost",
@@ -19,13 +20,22 @@ con.connect(function(err) {
 });
 
 
+
+app.use(express.json());
 app.get("/add/company/:name", (req, res) => {
 	let s = new companyAccountCreator(req.params.name);
 	s.loadDatabaseConnection(con);
 	s.createCompanyInstance();
-	res.send(s.getUID());
+	res.json({"status":"success", "payload":{"company_UID":s.getUID()}});
 })
 
+app.post("/add/user", (req, res) => {
+	const {name, cc, interests} = req.body;
+	console.log(name, cc, interests);
+	var u = new userSignup(name, cc, interests, con);
+	u.insert(res);
+
+})
 
 app.get("/stat", (req, res) => {
 	res.send("running");		
@@ -33,14 +43,7 @@ app.get("/stat", (req, res) => {
 
 
 app.get("/auth/:code", (req, res) => {
-	
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Saniroot",
-  database: 'edi',
-  port: 3306,
-});
+
 })
 
 
