@@ -152,6 +152,7 @@ app.get("/get/all-connected", (req, res) => {
 app.get("/get/avalible-topics", (req, res) => {
 	var all = []
 	for(var c in pool) {
+		c=pool[c]
 		c=c.getITRS()
 		c=JSON.parse(c)
 		for(var i in c) {
