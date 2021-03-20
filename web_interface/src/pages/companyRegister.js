@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
-
+import api from './api.js'
 function generateKey() {
 	var name = $("#name")[0].value;
 	if(name.length > 0) {
 		
 		var settings = {
-		  "url": "http://localhost:8000/add/company/"+name,
+		  "url": api()+"/add/company/"+name,
 		  "method": "GET",
 		  "timeout": 0,
 		};

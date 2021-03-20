@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
+import api from './api.js'
 function addInterest()  {
 	var data = $("#int")[0].value
 	$("#interests").append(`<li>${data}</li>`)
@@ -11,7 +12,7 @@ function addInterest()  {
 function submit() {
 	var interests = $("#interests")[0].innerText.split("\n").join(", ")
 	var settings = {
-	  "url": "http://localhost:8000/add/user",
+	  "url": api()+"/add/user",
 	  "method": "POST",
 	  "timeout": 0,
 	  "headers": {
