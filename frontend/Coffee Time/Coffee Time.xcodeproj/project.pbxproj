@@ -14,6 +14,11 @@
 		3DF4EE732605F60000D2F18E /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE722605F60000D2F18E /* MainScreen.swift */; };
 		3DF4EE7B2605FE1000D2F18E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE7A2605FE1000D2F18E /* ChatView.swift */; };
 		3DF4EE822605FE8200D2F18E /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE812605FE8200D2F18E /* ChatModel.swift */; };
+		3DF4EE92260620CE00D2F18E /* InteretsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE91260620CE00D2F18E /* InteretsScreen.swift */; };
+		3DF4EE96260620D800D2F18E /* TopicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE95260620D800D2F18E /* TopicsScreen.swift */; };
+		3DF4EE99260620EA00D2F18E /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE98260620EA00D2F18E /* InterestsModel.swift */; };
+		3DF4EE9D260620F200D2F18E /* TopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EE9C260620F200D2F18E /* TopicsModel.swift */; };
+		3DF4EEA1260620FF00D2F18E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EEA0260620FF00D2F18E /* MainModel.swift */; };
 		94DD05FC2606095D006C0BB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD05FB2606095D006C0BB2 /* Registration.swift */; };
 		94DD060126060FA0006C0BB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94DD060026060FA0006C0BB2 /* Starscream */; };
 		94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */; };
@@ -29,6 +34,11 @@
 		3DF4EE722605F60000D2F18E /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		3DF4EE7A2605FE1000D2F18E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		3DF4EE812605FE8200D2F18E /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		3DF4EE91260620CE00D2F18E /* InteretsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteretsScreen.swift; sourceTree = "<group>"; };
+		3DF4EE95260620D800D2F18E /* TopicsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsScreen.swift; sourceTree = "<group>"; };
+		3DF4EE98260620EA00D2F18E /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
+		3DF4EE9C260620F200D2F18E /* TopicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsModel.swift; sourceTree = "<group>"; };
+		3DF4EEA0260620FF00D2F18E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		94DD05FB2606095D006C0BB2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,11 +105,13 @@
 		3DF4EE6E2605F5A300D2F18E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				3DF4EEA0260620FF00D2F18E /* MainModel.swift */,
 				3DF4EE722605F60000D2F18E /* MainScreen.swift */,
+				3DF4EE8E2606209300D2F18E /* Interests */,
+				3DF4EE8F2606209D00D2F18E /* Topics */,
 				3DF4EE762605F62900D2F18E /* Chat */,
-				3DF4EE752605F60900D2F18E /* Interests */,
-				3DF4EE772605F63A00D2F18E /* Profile */,
-				94DD05FB2606095D006C0BB2 /* Registration.swift */,
+				3DF4EEA42606215D00D2F18E /* Registration */,
+				3DF4EE90260620A500D2F18E /* Profile */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -112,13 +124,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		3DF4EE752605F60900D2F18E /* Interests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interests;
-			sourceTree = "<group>";
-		};
 		3DF4EE762605F62900D2F18E /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,18 +133,44 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		3DF4EE772605F63A00D2F18E /* Profile */ = {
+		3DF4EE8B26061EF300D2F18E /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		3DF4EE8E2606209300D2F18E /* Interests */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4EE98260620EA00D2F18E /* InterestsModel.swift */,
+				3DF4EE91260620CE00D2F18E /* InteretsScreen.swift */,
+			);
+			path = Interests;
+			sourceTree = "<group>";
+		};
+		3DF4EE8F2606209D00D2F18E /* Topics */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4EE9C260620F200D2F18E /* TopicsModel.swift */,
+				3DF4EE95260620D800D2F18E /* TopicsScreen.swift */,
+			);
+			path = Topics;
+			sourceTree = "<group>";
+		};
+		3DF4EE90260620A500D2F18E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		3DF4EE8B26061EF300D2F18E /* Custom Views */ = {
+		3DF4EEA42606215D00D2F18E /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				94DD05FB2606095D006C0BB2 /* Registration.swift */,
 			);
-			path = "Custom Views";
+			path = Registration;
 			sourceTree = "<group>";
 		};
 		94DD06032606113C006C0BB2 /* Networking */ = {
@@ -230,7 +261,12 @@
 				3DF4EE732605F60000D2F18E /* MainScreen.swift in Sources */,
 				3DF4EE592605F56300D2F18E /* Coffee_TimeApp.swift in Sources */,
 				94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */,
+				3DF4EE9D260620F200D2F18E /* TopicsModel.swift in Sources */,
+				3DF4EE99260620EA00D2F18E /* InterestsModel.swift in Sources */,
+				3DF4EE92260620CE00D2F18E /* InteretsScreen.swift in Sources */,
+				3DF4EEA1260620FF00D2F18E /* MainModel.swift in Sources */,
 				94DD05FC2606095D006C0BB2 /* Registration.swift in Sources */,
+				3DF4EE96260620D800D2F18E /* TopicsScreen.swift in Sources */,
 				3DF4EE6B2605F59600D2F18E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

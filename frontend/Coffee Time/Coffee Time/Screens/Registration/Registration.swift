@@ -5,11 +5,9 @@
 //  Created by Andre Emmenegger on 20.03.21.
 //
 
-import Foundation
-
 import SwiftUI
 
-struct Registration: View {
+struct RegistrationScreen: View {
     
     var body: some View {
         VStack{
