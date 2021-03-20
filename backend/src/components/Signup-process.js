@@ -23,7 +23,7 @@ class companyAccountCreator {
 		companyCode = companyCode.replace(/-/g, "");
 		this.uid = companyCode;
 		  
-		var sqls = [`create table company_members_${companyCode} (id int(9) NOT NULL AUTO_INCREMENT,name varchar(500) NOT NULL,interests varchar(5000) NOT NULL,contact varchar(5000) NOT NULL, UUID varchar(4096) NOT NULL, AUTH_KEY varchar(255) NOT NULL, primary key(id))`, `insert into authentication_codes (code, company) values ("${companyCode}", "${this.name}")`];
+		var sqls = [`create table company_members_${companyCode} (id int(9) NOT NULL AUTO_INCREMENT, name varchar(500) NOT NULL, interests varchar(5000) NOT NULL, contact varchar(5000) NOT NULL, UUID varchar(4096) NOT NULL, AUTH_KEY varchar(255) NOT NULL, PRIMARY KEY(id))`, `insert into authentication_codes (code, company) values ("${companyCode}", "${this.name}")`];
 		for(var sql in sqls) {
 			sql = sqls[sql];
 			this.con.query(sql, function(err, results, fields) {
