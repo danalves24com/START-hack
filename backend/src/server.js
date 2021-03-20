@@ -28,7 +28,12 @@ class client {
 	}	
 	setUUID(uuid) {this.uuid = uuid;}
 	getUUID() {return this.uuid;}
+	setCUID(cuid) {this.cuid = cuid;}
+	setITRS(interests) {this.interests = interests;}
+	getITRS() {return this.interests;}
+	getCUID(cuid) {return this.cuid;}
 	getCON() {return this.con;}
+	
 }
 
 
@@ -47,9 +52,13 @@ var server = ws.createServer(function (conn) {
 		switch(str['event']) {
 			case "id_self":				
 				cli.setUUID(str['data']['UUID']);
+				cli.setCUID(str["data"]["CUID"]);
 				var id = cli.getUUID();
 				pool[`${id}`] = cli;
 				conn.sendText("helo "+id) // yes helo not hello
+				break;
+			case "pvd_interests":
+				cli.setITRS(str["data"]["ITRS"])				
 				break;
 			case "send_to":
 				var id = str["data"]["to"], payload = str["data"]["from"];			
@@ -61,28 +70,6 @@ var server = ws.createServer(function (conn) {
 //				((pool[id]).getCON()).sendText(JSON.stringify(message));
 				break;
 		}
-
-
-		/*
-		if(str.includes("id_self")) {
-
-		}
-		else if (str=="id_me") {
-			conn.sendText(cli.getUUID())
-		}
-		else if (str.includes("send_to")) {
-			var id = str.split(":")[1], payload = str.split(":")[2];			
-			console.log("sending message to "+id);
-			for(var e in pool) {
-				console.log(e)				
-			}
-			var message = {"event":"com_rec", "data":{"origin":cli.getUUID(), "message":payload}}
-			((pool[`${id}`]).getCON()).sendText(JSON.stringify(message));
-		}
-		else {
-
-		} 
-		*/
 		console.log("Received "+str)
 
 	    })
@@ -93,16 +80,20 @@ var server = ws.createServer(function (conn) {
 }).listen(8001)
 
 
+
+
 /*
  * ENDPOINTS
  */
 
 app.use(express.json());
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
 app.get("/add/company/:name", (req, res) => {
 	let s = new companyAccountCreator(req.params.name);
 	s.loadDatabaseConnection(con);
@@ -118,7 +109,7 @@ app.post("/add/user", (req, res) => {
 
 })
 
-app.get("/stat", (req, res) => {
+app.get("/stat", (req, res) => {	
 	res.send("running");		
 })
 
@@ -140,14 +131,35 @@ app.post("/add/topic/:topic", (req, res) => {
 	var time = ( new Date().getTime() )
 	console.log(time)
 	var sql = `insert into trending_current_topics (topic, time) values ('${req.params.topic}', '${time}')`
+	for(var c in pool) {
+		(c.getCON()).sentText(JSON.stringify({"event":"update_buble", "data": {"topic":req.params.topic}}))
+	}
 	con.query(sql, (e, r, f) => {
 		if(e) {} else {res.json({"status":"success"})}
 	})
 })
 
 app.get("/get/all-connected", (req, res) => {
-	var size = Object.keys(pool).length
+	var size = Object.keys(pool).length;
+
+	for(var p in pool) {
+		
+	}
+		
 	res.json({"status":"success", "data": {"currently_on":size}})
+})
+
+app.get("/get/avalible-topics", (req, res) => {
+	var all = []
+	for(var c in pool) {
+		c=c.getITRS()
+		c=JSON.parse(c)
+		for(var i in c) {
+			if(!all.includes(i)) {
+				all.push(c);	
+			}
+		}	
+	}	
 })
 
 app.get("/get/trending-topics", (req, res) => {
@@ -173,28 +185,44 @@ app.get("/get/trending-topics", (req, res) => {
 })
 
 
-app.get("/login/:code", (req, res) => {
+
+app.get("/login/:code",  (req, res) => {
 	var auth = false;
 	var sql0 = `select * from authentication_codes`
-	con.query(sql0, (e, r ,f) => {
+	async function r() {
+	var p = new Promise(function(resolve, reject) {con.query(sql0, (e, r ,f) => {
+		
 		for(var n in r) {
 			n = r[n];			
 			var sql = `select * from company_members_${n.code} where AUTH_KEY="${req.params.code}"`
-			con.query(sql, (e1, r1, f1) => {
-				console.log(r1[0])
+			new Promise(function(re, rj){ 
+				con.query(sql, (e1, r1, f1) => {
+				//console.log(r1[0])
 				if(r1.length > 0 && !auth) {
 					res.json({"auth":"success", "data": {"uuid":r1[0].UUID, "company_uid":n.code}})
 					auth = true;
 					console.log("match")
 				
-				}			
-
+				}
+				console.log("doing")
+				re()
 			})
-		}
-
-	})
-
+			})
+	
+		}		
+		
+	})})
+	var re = await p;
+	console.log(re)
+		console.log("done")
+	}
+	r()
+	// whatever lol - not enough time anyway
 })
+
+
+
+
 
 app.get("/about/:uuid/:company", (req, res) => {
 	var sql = `select * from company_members_${req.params.company} where UUID="${req.params.uuid}"`
