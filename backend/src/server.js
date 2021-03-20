@@ -160,7 +160,8 @@ app.get("/get/avalible-topics", (req, res) => {
 				all.push(c);	
 			}
 		}	
-	}	
+	}
+	res.json({"status":"success", "data": {"list":all}})
 })
 
 app.get("/get/trending-topics", (req, res) => {
