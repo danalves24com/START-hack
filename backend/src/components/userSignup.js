@@ -26,10 +26,10 @@ class userSignup {
 			console.log(r.length > 0)
 			if(r.length > 0) {
 			 	var key = uuidv4().split('-')[0];			
-				var sql = `INSERT into company_members_${companyUID} (name, interests, contact, UUID, AUTH_KEY) values ("${data[0]}", "${data[1]}", "nada", "${UUID}", "${key}");`
-				c.query(sql, (e, r ,f) => {
-					if(e) {console.log(e);res.json({"status":"fail"})}
-					console.log(r);
+				var sql = `INSERT into company_members_${companyUID} ( name, interests, contact, UUID, AUTH_KEY) values ("${data[0]}", "${data[1]}", "nada", "${UUID}", "${key}");`
+				c.query(sql, (e1, r2 ,f2) => {
+					if(e1) {console.log(e1);res.json({"status":"fail"})}
+					console.log(r1);
 					res.json({"status":"success", "payload": {"UUID":UUID, "AUTH_KEY":key}});
 
 				})
