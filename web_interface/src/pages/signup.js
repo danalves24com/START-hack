@@ -25,6 +25,7 @@ function submit() {
 	
 	$.ajax(settings).done(function (response) {
 		console.log(response);
+
 		$("#code")[0].append(`Use this code to sign-in using the app: ${response.payload.AUTH_KEY}`)
 		
 	});
@@ -49,7 +50,7 @@ class Signup extends Component {
 							</center>
 						</div>
 						<div class="py-4 text-center">
-							<button class="rounded border border-black p-3 px-5" onClick={submit}>Join</button>
+							<button class="rounded border border-black p-3 px-5" onClick={submit} id="sub">Join</button>
 						</div>
 						
 						<div class="py-1 text-center">
