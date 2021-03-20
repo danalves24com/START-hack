@@ -10,12 +10,16 @@ import SwiftUI
 @main
 struct Coffee_TimeApp: App {
     
-    let mainModel = MainModel.shared 
+    let mainModel = MainModel.shared
+    let chatHelper = ChatHelper()
     
     
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            //ChatContentView(contentMessage: "Hi, I am your friend", isCurrentUser: false)
+            //MainScreen()
+            
+            ChatView().environmentObject(chatHelper)
         }
     }
 }

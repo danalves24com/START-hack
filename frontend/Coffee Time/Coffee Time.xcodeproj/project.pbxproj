@@ -32,6 +32,9 @@
 		3DF4EEC52606376600D2F18E /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBD2606376600D2F18E /* Montserrat-ExtraBold.ttf */; };
 		3DF4EEC92606445800D2F18E /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EEC82606445800D2F18E /* View+Ext.swift */; };
 		3DF4EECD2606492600D2F18E /* Magnetic in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF4EECC2606492600D2F18E /* Magnetic */; };
+		945CE26B260660B300E414A8 /* ChatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CE26A260660B300E414A8 /* ChatHelper.swift */; };
+		945CE26E260664F300E414A8 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CE26D260664F200E414A8 /* MessageView.swift */; };
+		945CE273260666EE00E414A8 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CE272260666EE00E414A8 /* MessageContentView.swift */; };
 		94DD05FC2606095D006C0BB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD05FB2606095D006C0BB2 /* Registration.swift */; };
 		94DD060126060FA0006C0BB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94DD060026060FA0006C0BB2 /* Starscream */; };
 		94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */; };
@@ -64,6 +67,9 @@
 		3DF4EEBC2606376600D2F18E /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		3DF4EEBD2606376600D2F18E /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		3DF4EEC82606445800D2F18E /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		945CE26A260660B300E414A8 /* ChatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHelper.swift; sourceTree = "<group>"; };
+		945CE26D260664F200E414A8 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		945CE272260666EE00E414A8 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		94DD05FB2606095D006C0BB2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +159,9 @@
 			children = (
 				3DF4EE812605FE8200D2F18E /* ChatModel.swift */,
 				3DF4EE7A2605FE1000D2F18E /* ChatView.swift */,
+				945CE26A260660B300E414A8 /* ChatHelper.swift */,
+				945CE26D260664F200E414A8 /* MessageView.swift */,
+				945CE272260666EE00E414A8 /* MessageContentView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -336,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				945CE26B260660B300E414A8 /* ChatHelper.swift in Sources */,
 				3DF4EEC92606445800D2F18E /* View+Ext.swift in Sources */,
 				3DF4EE822605FE8200D2F18E /* ChatModel.swift in Sources */,
 				3DF4EE7B2605FE1000D2F18E /* ChatView.swift in Sources */,
@@ -345,6 +355,8 @@
 				94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */,
 				3DF4EE9D260620F200D2F18E /* TopicsModel.swift in Sources */,
 				3DF4EEAC260631BF00D2F18E /* MainScreenTabBar.swift in Sources */,
+				945CE26E260664F300E414A8 /* MessageView.swift in Sources */,
+				945CE273260666EE00E414A8 /* MessageContentView.swift in Sources */,
 				3DF4EE99260620EA00D2F18E /* InterestsModel.swift in Sources */,
 				3DF4EE92260620CE00D2F18E /* InteretsScreen.swift in Sources */,
 				3DF4EEA9260631A900D2F18E /* MainScreenHeader.swift in Sources */,

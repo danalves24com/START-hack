@@ -21,7 +21,6 @@ class ChatNetworkManager {
     func connect(){
         guard let url = URL(string: CTURL.chat) else { return }
         var request = URLRequest(url: url)
-        
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
