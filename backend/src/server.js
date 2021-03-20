@@ -183,7 +183,7 @@ app.get("/login/:code", (req, res) => {
 			con.query(sql, (e1, r1, f1) => {
 				console.log(r1[0])
 				if(r1.length > 0 && !auth) {
-					res.json({"auth":"success"})
+					res.json({"auth":"success", "data": {"uuid":r1[0].UUID, "company_uid":n.code}})
 					auth = true;
 					console.log("match")
 				
