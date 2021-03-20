@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Coffee_TimeApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainScreen()
         }
     }
 }

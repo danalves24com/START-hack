@@ -1,5 +1,5 @@
 //
-//  MainScreen.swift
+//  ChatView.swift
 //  Coffee Time
 //
 //  Created by Kai Zheng on 20.03.21.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct MainScreen: View {
+struct ChatView: View {
     
     var body: some View {
-        ChatView()
+        EmptyView()
     }
 }
+
