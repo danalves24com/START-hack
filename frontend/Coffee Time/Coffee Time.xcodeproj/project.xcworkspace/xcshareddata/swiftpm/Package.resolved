@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Magnetic",
+        "repositoryURL": "https://github.com/efremidze/Magnetic.git",
+        "state": {
+          "branch": null,
+          "revision": "84ab0de02f24041f774b95fb0810a793e6e31899",
+          "version": "3.2.1"
+        }
+      },
+      {
         "package": "Starscream",
         "repositoryURL": "https://github.com/daltoniam/Starscream",
         "state": {

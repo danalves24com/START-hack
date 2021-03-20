@@ -31,6 +31,7 @@
 		3DF4EEC42606376600D2F18E /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBC2606376600D2F18E /* Montserrat-ExtraLight.ttf */; };
 		3DF4EEC52606376600D2F18E /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBD2606376600D2F18E /* Montserrat-ExtraBold.ttf */; };
 		3DF4EEC92606445800D2F18E /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EEC82606445800D2F18E /* View+Ext.swift */; };
+		3DF4EECD2606492600D2F18E /* Magnetic in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF4EECC2606492600D2F18E /* Magnetic */; };
 		94DD05FC2606095D006C0BB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD05FB2606095D006C0BB2 /* Registration.swift */; };
 		94DD060126060FA0006C0BB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94DD060026060FA0006C0BB2 /* Starscream */; };
 		94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF4EECD2606492600D2F18E /* Magnetic in Frameworks */,
 				94DD060126060FA0006C0BB2 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +269,7 @@
 			name = "Coffee Time";
 			packageProductDependencies = (
 				94DD060026060FA0006C0BB2 /* Starscream */,
+				3DF4EECC2606492600D2F18E /* Magnetic */,
 			);
 			productName = "Coffee Time";
 			productReference = 3DF4EE552605F56300D2F18E /* Coffee Time.app */;
@@ -297,6 +300,7 @@
 			mainGroup = 3DF4EE4C2605F56300D2F18E;
 			packageReferences = (
 				94DD05FF26060FA0006C0BB2 /* XCRemoteSwiftPackageReference "Starscream" */,
+				3DF4EECB2606492600D2F18E /* XCRemoteSwiftPackageReference "Magnetic" */,
 			);
 			productRefGroup = 3DF4EE562605F56300D2F18E /* Products */;
 			projectDirPath = "";
@@ -538,6 +542,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3DF4EECB2606492600D2F18E /* XCRemoteSwiftPackageReference "Magnetic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/efremidze/Magnetic.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
 		94DD05FF26060FA0006C0BB2 /* XCRemoteSwiftPackageReference "Starscream" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/daltoniam/Starscream";
@@ -549,6 +561,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3DF4EECC2606492600D2F18E /* Magnetic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DF4EECB2606492600D2F18E /* XCRemoteSwiftPackageReference "Magnetic" */;
+			productName = Magnetic;
+		};
 		94DD060026060FA0006C0BB2 /* Starscream */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 94DD05FF26060FA0006C0BB2 /* XCRemoteSwiftPackageReference "Starscream" */;
