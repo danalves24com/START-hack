@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 var mysql = require('mysql');
+const cors = require('cors')
 var { Matcher } = require("./components/Matcher.js")
 var { companyAccountCreator } = require("./components/Signup-process.js")
 var {userSignup} = require("./components/userSignup.js");
@@ -97,6 +98,11 @@ var server = ws.createServer(function (conn) {
  */
 
 app.use(express.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.get("/add/company/:name", (req, res) => {
 	let s = new companyAccountCreator(req.params.name);
 	s.loadDatabaseConnection(con);
@@ -128,5 +134,81 @@ app.get("/match_random/:uuid/:companyCode", (req, res) => {
 	var m = new Matcher(req.params.uuid, req.params.companyCode);
 	res.send(m.randomMatch());
 })
+
+
+app.post("/add/topic/:topic", (req, res) => {
+	var time = ( new Date().getTime() )
+	console.log(time)
+	var sql = `insert into trending_current_topics (topic, time) values ('${req.params.topic}', '${time}')`
+	con.query(sql, (e, r, f) => {
+		if(e) {} else {res.json({"status":"success"})}
+	})
+})
+
+app.get("/get/all-connected", (req, res) => {
+	var size = Object.keys(pool).length
+	res.json({"status":"success", "data": {"currently_on":size}})
+})
+
+app.get("/get/trending-topics", (req, res) => {
+	var minTime = ( new Date().getTime() ) - 86400000;
+	console.log(minTime)
+	var topics = [];
+	var sql = `select * from trending_current_topics`
+	con.query(sql, (e, r, f) => {
+		
+		for(var n in r) {
+			n = r[n]
+			if(parseInt(n.time) > minTime) {
+				if(Math.random() < 0.5 && topics.length < 10) {
+		
+					console.log(n.topic)
+					topics.push(n.topic);
+				
+				}
+			}
+		}
+		res.json({"topics": topics})
+	})
+})
+
+
+app.get("/login/:code", (req, res) => {
+	var auth = false;
+	var sql0 = `select * from authentication_codes`
+	con.query(sql0, (e, r ,f) => {
+		for(var n in r) {
+			n = r[n];			
+			var sql = `select * from company_members_${n.code} where AUTH_KEY="${req.params.code}"`
+			con.query(sql, (e1, r1, f1) => {
+				console.log(r1[0])
+				if(r1.length > 0 && !auth) {
+					res.json({"auth":"success"})
+					auth = true;
+					console.log("match")
+				
+				}			
+
+			})
+		}
+
+	})
+
+})
+
+app.get("/about/:uuid/:company", (req, res) => {
+	var sql = `select * from company_members_${req.params.company} where UUID="${req.params.uuid}"`
+	con.query(sql, (e, r, f) => {
+		console.log(r)
+		if(r.length <= 0) {
+			res.json({"status": "fail"})
+		}
+		else {
+			r= r[0]
+			res.json({"status": "success", "data": {"name":r.name, "contact": r.contact, "interests": r.interests}})
+		}
+	})
+})
+
 
 app.listen(8000, () => console.log("server is running on port 8000"));
