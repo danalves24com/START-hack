@@ -57,6 +57,6 @@ enum SafeAreaSize {
     static let bottom               = Device.isiPhoneXType ? bottomX : bottomRest
 }
 
-enum URL{
-    static let ct_URL: String = "test"
+enum CTURL {
+    static let chat: String = "test"
 }

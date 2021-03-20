@@ -64,10 +64,9 @@
 		3DF4EE572605F56300D2F18E /* Coffee Time */ = {
 			isa = PBXGroup;
 			children = (
-				94DD06032606113C006C0BB2 /* Networking */,
 				3DF4EE692605F58B00D2F18E /* Utilities */,
-				3DF4EE682605F58400D2F18E /* Models */,
-				3DF4EE712605F5D600D2F18E /* Custom Views */,
+				94DD06032606113C006C0BB2 /* Networking */,
+				3DF4EE8B26061EF300D2F18E /* Custom Views */,
 				3DF4EE702605F5D000D2F18E /* Main */,
 				3DF4EE6E2605F5A300D2F18E /* Screens */,
 				3DF4EE5C2605F56700D2F18E /* Assets.xcassets */,
@@ -83,13 +82,6 @@
 				3DF4EE5F2605F56700D2F18E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		3DF4EE682605F58400D2F18E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		3DF4EE692605F58B00D2F18E /* Utilities */ = {
@@ -120,13 +112,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		3DF4EE712605F5D600D2F18E /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Custom Views";
-			sourceTree = "<group>";
-		};
 		3DF4EE752605F60900D2F18E /* Interests */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +133,13 @@
 			children = (
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		3DF4EE8B26061EF300D2F18E /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		94DD06032606113C006C0BB2 /* Networking */ = {

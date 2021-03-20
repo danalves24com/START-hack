@@ -5,34 +5,35 @@
 //  Created by Andre Emmenegger on 20.03.21.
 //
 
-import Foundation
-import Starscream
 import SwiftUI
+import Starscream
 
-
-
-
-class ChatNetworkManager: WebSocketDelegate{
-    func didReceive(event: WebSocketEvent, client: WebSocket) {
-        
-    }
+class ChatNetworkManager {
     
+    static var shared = ChatNetworkManager()
+    private init() {}
     
     var socket: WebSocket!
     var isConnected = false
     let server = WebSocketServer()
     
+    
     func connect(){
-        var request = URLRequest(url: URL(string: URL.ct_URL)!)
+        guard let url = URL(string: CTURL.chat) else { return }
+        var request = URLRequest(url: url)
+        
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
     }
+}
+
+
+extension ChatNetworkManager: WebSocketDelegate {
     
-    
-    
-    
-   
+    func didReceive(event: WebSocketEvent, client: WebSocket) {
+        
+    }
 }
 
