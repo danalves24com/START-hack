@@ -41,11 +41,21 @@ class client {
  * WEBSOCKET
  */
 
+function broadcast(data) {
+
+	for(var user in pool) {
+		user = pool[user]
+		var cn = user.getCON();
+		cn.sendText(data);
+	}
+}
+
 var pool = {};
 
 var server = ws.createServer(function (conn) {
 	console.log("New connection")
     	var cli = new client(conn)
+	broadcast(JSON.stringify(getAllAvalibleInterests()));
 	conn.on("text", function (str) {
 		str = JSON.parse(str);
 		console.log(str);
@@ -149,7 +159,10 @@ app.get("/get/all-connected", (req, res) => {
 	res.json({"status":"success", "data": {"currently_on":size}})
 })
 
-app.get("/get/avalible-topics", (req, res) => {
+
+function getAllAvalibleInterests() {
+
+
 	var all = []
 	for(var c in pool) {
 		c=pool[c]
@@ -157,11 +170,16 @@ app.get("/get/avalible-topics", (req, res) => {
 		c=JSON.parse(c)
 		for(var i in c) {
 			if(!all.includes(i)) {
-				all.push(c);	
+				all.push(i);	
 			}
 		}	
 	}
-	res.json({"status":"success", "data": {"list":all}})
+	return {"status":"success", "event":"update_buble", "data": {"list":all}}
+}
+
+
+app.get("/get/avalible-topics", (req, res) => {
+	res.send(getAllAvalibleInterests())
 })
 
 app.get("/get/trending-topics", (req, res) => {
