@@ -18,12 +18,12 @@ struct MainScreenTabBar: View {
     var body: some View {
         HStack {
             Spacer()
-            TabButton(image: interestsImage, text: "Interests", imageSize: 22)
+            TabButton(tab: .interests, image: interestsImage, text: "Interests", imageSize: 22)
             Spacer()
             GenerateButton()
-                .offset(y: -8)
+                .offset(y: -10)
             Spacer()
-            TabButton(image: topicsImage, text: "Topics", imageSize: 18)
+            TabButton(tab: .topics, image: topicsImage, text: "Topics", imageSize: 18)
             Spacer()
         }
     }
@@ -31,6 +31,9 @@ struct MainScreenTabBar: View {
     
     private struct TabButton: View {
         
+        @StateObject private var mainModel = MainModel.shared
+        
+        var tab: ActiveTab
         var image: Image
         var text: String
         var imageSize: CGFloat
@@ -44,11 +47,16 @@ struct MainScreenTabBar: View {
                 
                 CTText(text: text, font: .custom(.regular, 12))
             }
+            .frame(width: 72, height: 72)
+            .cTItemScaleTapGesture { mainModel.activeTab = tab }
         }
     }
     
     
     private struct GenerateButton: View {
+        
+        @StateObject private var mainModel = MainModel.shared
+        
         
         var body: some View {
             VStack {
@@ -58,7 +66,10 @@ struct MainScreenTabBar: View {
             }
             .frame(width: 100, height: 100)
             .background(CTColor.background)
-            .cornerRadius(20)
+            .cornerRadius(24)
+            .cTItemScaleTapGesture {
+                //generate
+            }
         }
     }
 }

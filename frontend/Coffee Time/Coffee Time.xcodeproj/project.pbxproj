@@ -30,6 +30,7 @@
 		3DF4EEC32606376600D2F18E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBB2606376600D2F18E /* Montserrat-Regular.ttf */; };
 		3DF4EEC42606376600D2F18E /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBC2606376600D2F18E /* Montserrat-ExtraLight.ttf */; };
 		3DF4EEC52606376600D2F18E /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4EEBD2606376600D2F18E /* Montserrat-ExtraBold.ttf */; };
+		3DF4EEC92606445800D2F18E /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4EEC82606445800D2F18E /* View+Ext.swift */; };
 		94DD05FC2606095D006C0BB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD05FB2606095D006C0BB2 /* Registration.swift */; };
 		94DD060126060FA0006C0BB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94DD060026060FA0006C0BB2 /* Starscream */; };
 		94DD06052606118B006C0BB2 /* ChatNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */; };
@@ -61,6 +62,7 @@
 		3DF4EEBB2606376600D2F18E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		3DF4EEBC2606376600D2F18E /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		3DF4EEBD2606376600D2F18E /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		3DF4EEC82606445800D2F18E /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		94DD05FB2606095D006C0BB2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		94DD06042606118B006C0BB2 /* ChatNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF4EE692605F58B00D2F18E /* Utilities */,
+				3DF4EEC72606444100D2F18E /* Extensions */,
 				94DD06032606113C006C0BB2 /* Networking */,
 				3DF4EE8B26061EF300D2F18E /* Custom Views */,
 				3DF4EE702605F5D000D2F18E /* Main */,
@@ -230,6 +233,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		3DF4EEC72606444100D2F18E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4EEC82606445800D2F18E /* View+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		94DD06032606113C006C0BB2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF4EEC92606445800D2F18E /* View+Ext.swift in Sources */,
 				3DF4EE822605FE8200D2F18E /* ChatModel.swift in Sources */,
 				3DF4EE7B2605FE1000D2F18E /* ChatView.swift in Sources */,
 				3DF4EE732605F60000D2F18E /* MainScreen.swift in Sources */,

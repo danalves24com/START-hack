@@ -5,4 +5,13 @@
 //  Created by Kai Zheng on 20.03.21.
 //
 
-import Foundation
+import SwiftUI
+
+struct InterestsScreen: View {
+    
+    var body: some View {
+        Rectangle()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .foregroundColor(.blue)
+    }
+}

@@ -16,10 +16,53 @@ struct MainScreen: View {
             
             VStack {
                 MainScreenHeader()
-                Spacer()
+                    .padding([.horizontal, .top], Layout.firstLayerPadding)
+                MainScreenContent()
                 MainScreenTabBar()
+                    .padding(.horizontal, Layout.firstLayerPadding)
             }
-            .padding([.horizontal, .top], Layout.firstLayerPadding)
+        }
+        .animation(.easeInOut(duration: 0.2))
+    }
+    
+    
+    private struct MainScreenContent: View {
+        
+        @StateObject private var mainModel = MainModel.shared
+        @GestureState private var dragOffset: CGFloat = .zero
+        
+        
+        var body: some View {
+            HStack(spacing: Layout.firstLayerPadding) {
+                InterestsScreen()
+                    .frame(width: Layout.firstLayerWidth)
+                    .padding(.leading, Layout.firstLayerPadding)
+                
+                TopicsScreen()
+                    .frame(width: Layout.firstLayerWidth)
+                    .padding(.trailing, Layout.firstLayerPadding)
+            }
+            .frame(width: Layout.screenWidth, alignment: .leading)
+            .gesture(
+                DragGesture(minimumDistance: 10, coordinateSpace: .global)
+                    .updating($dragOffset) { value, state, transaction in
+                        if state <= 0 && mainModel.activeTab == .interests
+                            || state >= 0 && mainModel.activeTab == .topics {
+                            state = value.translation.width
+                        }
+                    }
+                    .onEnded { value in
+                        let state = value.translation.width
+                        
+                        if state < -50 && mainModel.activeTab == .interests {
+                            mainModel.activeTab = .topics
+                        }
+                        if state > 50 && mainModel.activeTab == .topics {
+                            mainModel.activeTab = .interests
+                        }
+                    }
+            )
+            .offset(x: dragOffset + mainModel.activeTab.offset)
         }
     }
 }
