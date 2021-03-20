@@ -55,7 +55,6 @@ var pool = {};
 var server = ws.createServer(function (conn) {
 	console.log("New connection")
     	var cli = new client(conn)
-	broadcast(JSON.stringify(getAllAvalibleInterests()));
 	conn.on("text", function (str) {
 		str = JSON.parse(str);
 		console.log(str);
@@ -68,7 +67,8 @@ var server = ws.createServer(function (conn) {
 				conn.sendText("helo "+id) // yes helo not hello
 				break;
 			case "pvd_interests":
-				cli.setITRS(str["data"]["ITRS"])				
+				cli.setITRS(str["data"]["ITRS"])			
+				broadcast(JSON.stringify(getAllAvalibleInterests()));
 				break;
 			case "send_to":
 				var id = str["data"]["to"], payload = str["data"]["from"];			
@@ -219,7 +219,7 @@ app.get("/login/:code",  (req, res) => {
 				con.query(sql, (e1, r1, f1) => {
 				//console.log(r1[0])
 				if(r1.length > 0 && !auth) {
-					res.json({"auth":"success", "data": {"uuid":r1[0].UUID, "company_uid":n.code}})
+					res.json({"auth":"success", "data": {"uuid":r1[0].UUID, "company_uid":n.code, "interests":(r1[0].interests).split(", ")}})
 					auth = true;
 					console.log("match")
 				
