@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 var mysql = require('mysql');
 var { Matcher } = require("./components/Matcher.js")
-var {Signup} = require("./components/Signup-process.js")
+var { companyAccountCreator } = require("./components/Signup-process.js")
+var pass = require("./config/pass.js")
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Saniroot",
+  password: pass,
   database: 'coffee_time',
   port: 3306,
 });
@@ -19,7 +20,7 @@ con.connect(function(err) {
 
 
 app.get("/add/company/:name", (req, res) => {
-	let s = new Signup(req.prams.name);
+	let s = new companyAccountCreator(req.params.name);
 	s.loadDatabaseConnection(con);
 	s.createCompanyInstance();
 	res.send(s.getUID());
