@@ -29,4 +29,11 @@ class MainModel: ObservableObject {
     
     // Data
     @Published var activeUsers: Int = 0
+    
+    
+    //Popups
+    
+    func showTextField(placeholder: String) {
+        
+    }
 }

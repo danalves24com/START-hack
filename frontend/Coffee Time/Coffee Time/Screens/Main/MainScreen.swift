@@ -31,16 +31,21 @@ struct MainScreen: View {
         @StateObject private var mainModel = MainModel.shared
         @GestureState private var dragOffset: CGFloat = .zero
         
+        var showInterests: Bool { mainModel.activeTab == .interests || dragOffset != 0 }
+        var showTopics: Bool { mainModel.activeTab == .topics || dragOffset != 0 }
+        
         
         var body: some View {
             HStack(spacing: Layout.firstLayerPadding) {
                 InterestsScreen()
                     .frame(width: Layout.firstLayerWidth)
                     .padding(.leading, Layout.firstLayerPadding)
+                    .opacity(showInterests ? 1 : 0)
                 
                 TopicsScreen()
                     .frame(width: Layout.firstLayerWidth)
                     .padding(.trailing, Layout.firstLayerPadding)
+                    .opacity(showTopics ? 1 : 0)
             }
             .frame(width: Layout.screenWidth, alignment: .leading)
             .gesture(

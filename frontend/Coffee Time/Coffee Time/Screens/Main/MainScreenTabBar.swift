@@ -57,18 +57,24 @@ struct MainScreenTabBar: View {
         
         @StateObject private var mainModel = MainModel.shared
         
+        var image: Image { mainModel.activeTab == .interests ? SFSymbol.shuffle : SFSymbol.plus }
+        
         
         var body: some View {
             VStack {
-                SFSymbol.shuffle
-                    .font(.system(size: 44, weight: .thin))
+                image
+                    .font(.system(size: 30, weight: .thin))
                     .foregroundColor(CTColor.black)
             }
-            .frame(width: 100, height: 100)
+            .frame(width: 80, height: 80)
             .background(CTColor.background)
             .cornerRadius(24)
             .cTItemScaleTapGesture {
-                //generate
+                if mainModel.activeTab == .interests {
+                    
+                } else {
+                    
+                }
             }
         }
     }

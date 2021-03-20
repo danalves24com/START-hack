@@ -15,7 +15,7 @@ enum Layout {
     static let multiplierWidth: CGFloat     = screenWidth/375.0
     static let multiplierHeight: CGFloat    = screenHeight/812.0
     
-    static let firstLayerPadding: CGFloat   = 20.0
+    static let firstLayerPadding: CGFloat   = 24.0
     static let firstLayerWidth              = screenWidth - (2.0 * firstLayerPadding)
     
     
@@ -72,7 +72,8 @@ enum SFSymbol {
     static let topicsFill           = Image(systemName: "bubble.right.fill")
     static let interests            = Image(systemName: "sun.min")
     static let topics               = Image(systemName: "bubble.right")
-    static let shuffle              = Image(systemName: "plus")
+    static let plus                 = Image(systemName: "plus")
+    static let shuffle              = Image(systemName: "hand.wave")
 }
 
 
@@ -114,3 +115,12 @@ enum Montserrat: String {
     
     var weight: String { return self.rawValue }
 }
+
+
+enum InterestThumbnail {
+    
+    static let meditation: UIImage   = UIImage(named: "")!
+}
+
+
+
