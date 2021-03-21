@@ -8,6 +8,7 @@
 import SwiftUI
 import SpriteKit
 import Magnetic
+import Combine
 
 struct BubbleView: UIViewControllerRepresentable {
     
@@ -23,7 +24,10 @@ struct BubbleView: UIViewControllerRepresentable {
     }
 
 
-    func updateUIViewController(_ uiViewController: BubbleVC, context: Context) {}
+    func updateUIViewController(_ uiViewController: BubbleVC, context: Context) {
+        
+        
+    }
 }
 
 
@@ -40,6 +44,8 @@ class BubbleVC: UIViewController {
     var magneticView: MagneticView?
     var magnetic: Magnetic?
     
+    var cancallables = Set<AnyCancellable>()
+    
     
     override func viewDidLoad() {
         let magneticView = MagneticView(frame: self.view.bounds)
@@ -48,15 +54,26 @@ class BubbleVC: UIViewController {
         view.backgroundColor = .clear
         magnetic?.backgroundColor = .clear
         magneticView.backgroundColor = .clear
+        
+        BubbleNetworkManager.shared.shouldAdd.sink { (name, image) in
+            self.addNode(with: name, image: image)
+        }
+        .store(in: &cancallables)
+        
+        BubbleNetworkManager.shared.shouldUpdate.sink { (name, count) in
+            self.updateNode(with: name, count: count)
+        }
+        .store(in: &cancallables)
+        
+        BubbleNetworkManager.shared.shouldDelete.sink { name in
+            self.deleteNode(with: name)
+        }
+        .store(in: &cancallables)
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        for i in 0..<12 {
-            addNode(with: "\(i)")
-        }
     }
 }
 

@@ -71,7 +71,13 @@ struct MainScreenTabBar: View {
             .cornerRadius(24)
             .cTItemScaleTapGesture {
                 if mainModel.activeTab == .interests {
-                    
+                    MatchNetworkManager.match { result in
+                        switch result {
+                        case let .failure(error): print(error)
+                        case let .success(match):
+                            print(match)
+                        }
+                    }
                 } else {
                     
                 }

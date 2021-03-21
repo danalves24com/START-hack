@@ -14,12 +14,19 @@ struct MainScreen: View {
             CTColor.white
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                MainScreenHeader()
-                    .padding([.horizontal, .top], Layout.firstLayerPadding)
-                MainScreenContent()
-                MainScreenTabBar()
-                    .padding(.horizontal, Layout.firstLayerPadding)
+            if UserDefaultsManager.shared.firstStart {
+                RegistrationScreen()
+            } else {
+                VStack {
+                    MainScreenHeader()
+                        .padding([.horizontal, .top], Layout.firstLayerPadding)
+                    MainScreenContent()
+                    MainScreenTabBar()
+                        .padding(.horizontal, Layout.firstLayerPadding)
+                }
+                .onAppear {
+                    BubbleNetworkManager.shared.connect()
+                }
             }
         }
         .animation(.easeInOut(duration: 0.2))

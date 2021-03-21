@@ -16,10 +16,8 @@ struct Coffee_TimeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //ChatContentView(contentMessage: "Hi, I am your friend", isCurrentUser: false)
-            //MainScreen()
-            
-            ChatView().environmentObject(chatHelper)
+            MainScreen()
+                .environmentObject(chatHelper)
         }
     }
 }
