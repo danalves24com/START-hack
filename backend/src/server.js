@@ -43,18 +43,32 @@ class client {
 
 function broadcast(data) {
 
-	for(var user in pool) {
+	for(var user in pool) {	
 		user = pool[user]
-		var cn = user.getCON();
-		cn.sendText(data);
+		if(user != null) {
+			var cn = user.getCON();
+			cn.sendText(data);
+		}
 	}
 }
 
 var pool = {};
 
+function updateView() {
+
+	var size = Object.keys(pool).length;
+
+	for(var p in pool) {
+		
+	}
+		
+	return {"status":"success", "data": {"currently_on":size}}
+}
+
 var server = ws.createServer(function (conn) {
 	console.log("New connection")
     	var cli = new client(conn)
+	broadcast(JSON.stringify(updateView()));
 	conn.on("text", function (str) {
 		str = JSON.parse(str);
 		console.log(str);
@@ -85,9 +99,8 @@ var server = ws.createServer(function (conn) {
 	    })
 	conn.on("close", function (code, reason) {
         	console.log("Connection closed")		
-		delete pool[cli.getUUID];
+		pool[cli.getUUID] = null;	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
-
 	})
 }).listen(8001)
 
