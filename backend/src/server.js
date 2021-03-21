@@ -188,8 +188,9 @@ function getAllAvalibleInterests() {
 				all.push(i);	
 			}
 		}	
-	}
-	return {"status":"success", "event":"update_buble", "data": {"list":all}}
+	} 
+	var size = Object.keys(pool).length;
+	return {"status":"success", "event":"update_buble", "data": {"list":all,"size":size}
 }
 
 
