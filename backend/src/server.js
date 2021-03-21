@@ -101,8 +101,15 @@ var server = ws.createServer(function (conn) {
 	    })
 	conn.on("close", function (code, reason) {
         	console.log("Connection closed")		
+
+		for(var e in pool) {
+			console.log(" ++ "+e)
+		}
 		delete pool[cli.getUUID];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
+		for(var e in pool) {
+			console.log(" -- "+e)
+		}
 	})
 }).listen(8001)
 
