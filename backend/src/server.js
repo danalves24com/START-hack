@@ -86,7 +86,7 @@ var server = ws.createServer(function (conn) {
 				cli.setITRS(str["data"]["ITRS"])			
 				broadcast(JSON.stringify(getAllAvalibleInterests()));
 				break;
-] = nullcase "send_to":
+			case "send_to":
 				var id = str["data"]["to"], payload = str["data"]["from"];			
 				console.log("sending message to "+id);
 				var message = {"event":"com_rec", "data":{"origin":cli.getUUID(), "message":payload}}
