@@ -161,7 +161,7 @@ app.get("/stat", (req, res) => {
 
 app.get("/match/:uuid/:companyCode", (req, res) => {
 	var m = new Matcher(req.params.uuid, req.params.companyCode);
-	m.match(res)
+	m.match(res, pool)
 })
 
 

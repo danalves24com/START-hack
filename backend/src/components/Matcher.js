@@ -28,8 +28,8 @@ class Matcher {
 	}
 
 
-	match(res) {
-
+	match(res, pool) {
+		this.pool = pool;
 		var personalInterests = []
 		var sql0 = `select * from company_members_${this.cc} where UUID ='${this.id}'`
 		console.log(sql0)
@@ -69,14 +69,24 @@ class Matcher {
 				}
 			}
 			if(bestMatchScore > 0) {
-				res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
+				if(matchIsOnline(bestMatchUUID)) {
+					res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
+				}
+				else {
+						res.json({"status":"fail", "reason": "no match found"})
+				}
 			}
 			else {
 				if(all.length > 0) {
 					var index = Math.floor(Math.random() * (all.length + 1)); 
 					var profile = all[index];
 					var matchID = profile.UUID;
-					res.json({"status":"success", "data":{"bestMatch":matchID}})
+					if(matchIsOnline(matchID)) {					
+						res.json({"status":"success", "data":{"bestMatch":matchID}})
+					}
+					else {
+						res.json({"status":"fail", "reason": "no match found"})
+					}
 				} else {
 					res.json({"status":"fail"})
 				}
@@ -84,6 +94,22 @@ class Matcher {
 		})
 
 	}
+
+
+	matchIsOnline(bestMatchUUID) {	
+		var pool = this.pool;
+			var matchIsOnline = false;
+			for(var user in pool) {				
+				user = pool[user]
+				if(user!=null) {
+					if(user.getUUID() == bestMatchUUID) {
+						matchIsOnline = true;
+					}
+				}
+			}
+			return matchIsOnline;
+	}
+
 	randomMatch() {
 		return "randomly matched " + this.id;
 	}
