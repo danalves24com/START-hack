@@ -99,7 +99,7 @@ var server = ws.createServer(function (conn) {
 	    })
 	conn.on("close", function (code, reason) {
         	console.log("Connection closed")		
-		pool[cli.getUUID] = null;	
+		delete pool[cli.getUUID];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 	})
 }).listen(8001)
@@ -181,6 +181,7 @@ function getAllAvalibleInterests() {
 	var all = []
 	for(var c in pool) {
 		c=pool[c]
+		console.log(c);
 		c=c.getITRS()	
 		for(var i in c) {
 			i = c[i]
