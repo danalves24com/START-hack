@@ -79,7 +79,7 @@ var server = ws.createServer(function (conn) {
 				cli.setUUID(str['data']['UUID']);
 				cli.setCUID(str["data"]["CUID"]);
 				var id = cli.getUUID();
-				pool[id] = cli;
+				pool.push(cli);
 				conn.sendText("helo "+id) // yes helo not hello
 				break;
 			case "pvd_interests":
@@ -90,7 +90,13 @@ var server = ws.createServer(function (conn) {
 				var id = str["data"]["to"], payload = str["data"]["from"];			
 				console.log("sending message to "+id);
 				var message = {"event":"com_rec", "data":{"origin":cli.getUUID(), "message":payload}}
-				var target = pool[id].getCON();
+				var target = null;
+				for(var p in pool) {
+					p = pool[p]
+					if(p.getUUID() == cli.getUUID()) {
+						target = p.getCON();
+					}
+				}
 				console.log(target);
 				target.sendText(JSON.stringify(message));
 //				((pool[id]).getCON()).sendText(JSON.stringify(message));
@@ -103,13 +109,14 @@ var server = ws.createServer(function (conn) {
         	console.log("Connection closed")		
 
 		for(var e in pool) {
-			console.log(" ++ "+e)
-		}
-		pool[cli.getUUID] = null
+			var ps = e;
+			e = pool[e];		
+			if(e.getUUID() == cli.getUUID()) {
+				pool[ps] = null;
+			}
+		}	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
-		for(var e in pool) {
-			console.log(" -- "+e)
-		}
+		
 	})
 }).listen(8001)
 
