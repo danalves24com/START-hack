@@ -69,7 +69,7 @@ class Matcher {
 				}
 			}
 			if(bestMatchScore > 0) {
-				if(matchIsOnline(bestMatchUUID)) {
+				if(this.matchIsOnline(bestMatchUUID)) {
 					res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
 				}
 				else {
@@ -81,7 +81,7 @@ class Matcher {
 					var index = Math.floor(Math.random() * (all.length + 1)); 
 					var profile = all[index];
 					var matchID = profile.UUID;
-					if(matchIsOnline(matchID)) {					
+					if(this.matchIsOnline(matchID)) {					
 						res.json({"status":"success", "data":{"bestMatch":matchID}})
 					}
 					else {
