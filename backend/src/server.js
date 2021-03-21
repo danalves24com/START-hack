@@ -84,8 +84,10 @@ var server = ws.createServer(function (conn) {
 
 	    })
 	conn.on("close", function (code, reason) {
-        	console.log("Connection closed")
+        	console.log("Connection closed")		
 		delete pool[cli.getUUID];
+		broadcast(JSON.stringify(getAllAvalibleInterests()));
+
 	})
 }).listen(8001)
 
