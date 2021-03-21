@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
+import api from './api.js'
 function addInterest()  {
 	var data = $("#int")[0].value
 	$("#interests").append(`<li>${data}</li>`)
@@ -11,7 +12,7 @@ function addInterest()  {
 function submit() {
 	var interests = $("#interests")[0].innerText.split("\n").join(", ")
 	var settings = {
-	  "url": "http://localhost:8000/add/user",
+	  "url": api()+"/add/user",
 	  "method": "POST",
 	  "timeout": 0,
 	  "headers": {
@@ -24,6 +25,7 @@ function submit() {
 	
 	$.ajax(settings).done(function (response) {
 		console.log(response);
+
 		$("#code")[0].append(`Use this code to sign-in using the app: ${response.payload.AUTH_KEY}`)
 		
 	});
@@ -48,7 +50,7 @@ class Signup extends Component {
 							</center>
 						</div>
 						<div class="py-4 text-center">
-							<button class="rounded border border-black p-3 px-5" onClick={submit}>Join</button>
+							<button class="rounded border border-black p-3 px-5" onClick={submit} id="sub">Join</button>
 						</div>
 						
 						<div class="py-1 text-center">
