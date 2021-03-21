@@ -79,7 +79,7 @@ var server = ws.createServer(function (conn) {
 				cli.setUUID(str['data']['UUID']);
 				cli.setCUID(str["data"]["CUID"]);
 				var id = cli.getUUID();
-				pool[`${id}`] = cli;
+				pool[id] = cli;
 				conn.sendText("helo "+id) // yes helo not hello
 				break;
 			case "pvd_interests":
@@ -105,7 +105,7 @@ var server = ws.createServer(function (conn) {
 		for(var e in pool) {
 			console.log(" ++ "+e)
 		}
-		delete pool[`${cli.getUUID}`];	
+		delete pool[cli.getUUID}];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 		for(var e in pool) {
 			console.log(" -- "+e)
