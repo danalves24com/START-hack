@@ -68,9 +68,11 @@ function updateView() {
 }
 
 var server = ws.createServer(function (conn) {
-	console.log("New connection")
-    	var cli = new client(conn)
-	broadcast(JSON.stringify(updateView()));
+	conn.on("connect", function(){		
+		console.log("New connection")
+	    	var cli = new client(conn)
+		broadcast(JSON.stringify(updateView()));
+	})
 	conn.on("text", function (str) {
 		str = JSON.parse(str);
 		console.log(str);
@@ -105,7 +107,18 @@ var server = ws.createServer(function (conn) {
 		for(var e in pool) {
 			console.log(" ++ "+e)
 		}
-		delete pool[cli.getUUID];	
+		delete pool[`${cli.getUUID}`];	
+		broadcast(JSON.stringify(getAllAvalibleInterests()));
+		for(var e in pool) {
+			console.log(" -- "+e)
+		}
+	})
+	conn.on("error", function(err){
+		
+		for(var e in pool) {
+			console.log(" ++ "+e)
+		}
+		delete pool[`${cli.getUUID}`];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 		for(var e in pool) {
 			console.log(" -- "+e)
