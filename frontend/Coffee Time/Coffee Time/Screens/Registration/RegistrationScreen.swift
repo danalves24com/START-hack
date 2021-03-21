@@ -36,6 +36,10 @@ struct RegistrationScreen: View {
                                 print(token.data.company_uid)
                                 print(token.data.uuid)
                                 print(token.data.interests)
+                                
+                                DispatchQueue.main.async {
+                                    MainModel.shared.tokenSuccess = true
+                                }
                             }
                         }
                     }
