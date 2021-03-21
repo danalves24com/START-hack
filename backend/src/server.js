@@ -54,7 +54,7 @@ function broadcast(data) {
 	}
 }
 
-var pool = {};
+var pool = [];
 
 function updateView() {
 
