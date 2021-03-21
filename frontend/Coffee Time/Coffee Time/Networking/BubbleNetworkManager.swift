@@ -95,6 +95,8 @@ extension BubbleNetworkManager: WebSocketDelegate {
         do {
             let employeeModel = try decoder.decode(EmployeeModel.self, from: Data(string.utf8))
             let newInterests = employeeModel.data.list
+            let onlineEmployees = employeeModel.data.size
+            MainModel.shared.activeUsers = onlineEmployees 
             algorithm(newInterests: newInterests)
         } catch {}
     }

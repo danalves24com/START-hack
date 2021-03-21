@@ -76,8 +76,10 @@ struct MainScreenTabBar: View {
                         case let .failure(error): print(error)
                         case let .success(match):
                             print(match)
-                            mainModel.connectedMatch = match.data.bestMatch
-                            mainModel.showChat = true 
+                            DispatchQueue.main.async {
+                                mainModel.connectedMatch = match.data.bestMatch
+                                mainModel.showChat = true 
+                            }
                         }
                     }
                 } else {

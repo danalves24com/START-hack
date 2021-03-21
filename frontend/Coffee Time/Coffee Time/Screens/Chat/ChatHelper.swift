@@ -11,21 +11,12 @@ import Combine
 
 class ChatHelper : ObservableObject {
     
-    @Published var messages: [Message]
+    @Published var messages: [Message] = []
     
     static let shared = ChatHelper()
-    private init() {
-        messages = [m1,m2,m3,m4,m5]
-    }
+    private init() {}
     
 
-    var m1 = Message(content: "hi", user: User(name:"Thomas", isCurrentUser: true))
-    var m2 = Message(content: "hi", user: User(name:"Paula", isCurrentUser: false))
-    var m3 = Message(content: "what are you doing", user: User(name:"Thomas", isCurrentUser: true))
-    var m4 = Message(content: "Nothing", user: User(name:"Paula", isCurrentUser: false))
-    var m5 = Message(content: "You?", user: User(name:"Paula", isCurrentUser: false))
-    
-    
     func sendMessage(_ chatMessage: Message) {
         messages.append(chatMessage)
         

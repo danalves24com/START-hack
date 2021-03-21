@@ -34,6 +34,7 @@ struct EmployeeModel: Codable {
     
     struct EmployeeData: Codable {
         var list: [String]
+        var size: Int
     }
 }
 
