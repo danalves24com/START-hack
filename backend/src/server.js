@@ -93,9 +93,11 @@ var server = ws.createServer(function (conn) {
 				var target = null;
 				for(var p in pool) {
 					p = pool[p]
-					if(p.getUUID() == cli.getUUID()) {
-						target = p.getCON();
-					}
+					if(p!=null){
+						if(p.getUUID() == cli.getUUID()) {
+							target = p.getCON();
+						}
+					} else {}
 				}
 				console.log(target);
 				target.sendText(JSON.stringify(message));
