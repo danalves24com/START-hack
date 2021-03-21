@@ -119,7 +119,7 @@ enum Montserrat: String {
 
 enum InterestThumbnail {
     
-    static let meditation: UIImage   = UIImage(named: "")!
+    static let interestWithImages: [String] = ["meditation", "music", "nature", "networking", "sport", "travel"]
 }
 
 

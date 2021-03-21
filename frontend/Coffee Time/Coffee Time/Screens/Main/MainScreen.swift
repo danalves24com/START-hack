@@ -9,23 +9,31 @@ import SwiftUI
 
 struct MainScreen: View {
     
+    @StateObject private var mainModel = MainModel.shared
+    
+    
     var body: some View {
         ZStack {
             CTColor.white
                 .edgesIgnoringSafeArea(.all)
             
-            if UserDefaultsManager.shared.firstStart {
-                RegistrationScreen()
+            if mainModel.showChat {
+                ChatView()
+                
             } else {
-                VStack {
-                    MainScreenHeader()
-                        .padding([.horizontal, .top], Layout.firstLayerPadding)
-                    MainScreenContent()
-                    MainScreenTabBar()
-                        .padding(.horizontal, Layout.firstLayerPadding)
-                }
-                .onAppear {
-                    BubbleNetworkManager.shared.connect()
+                if UserDefaultsManager.shared.firstStart {
+                    RegistrationScreen()
+                } else {
+                    VStack {
+                        MainScreenHeader()
+                            .padding([.horizontal, .top], Layout.firstLayerPadding)
+                        MainScreenContent()
+                        MainScreenTabBar()
+                            .padding(.horizontal, Layout.firstLayerPadding)
+                    }
+                    .onAppear {
+                        BubbleNetworkManager.shared.connect()
+                    }
                 }
             }
         }

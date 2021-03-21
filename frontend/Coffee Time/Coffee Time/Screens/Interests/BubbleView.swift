@@ -84,14 +84,15 @@ extension BubbleVC: BubbleProtocol {
         var node: Node
         
         if let image = image {
-            node = ImageNode(text: name, image: image, color: .gray, radius: 45)
+            node = ImageNode(text: name, image: image, color: .white, radius: 45)
+            node.selectedAnimation()
         } else {
             let color = UIColor(CTRandom.generateRandomColor())
             node = Node(text: name, image: nil, color: color, radius: 45)
         }
         
-        node.fontName = "Montserrat-Medium"
-        node.fontSize = 18
+        node.fontName = "Montserrat-SemiBold"
+        node.fontSize = 16
         node.name = name
         magnetic?.addChild(node)
     }
@@ -112,11 +113,21 @@ extension BubbleVC: BubbleProtocol {
 
 
 class ImageNode: Node {
+    
     override var image: UIImage? {
         didSet {
             texture = image.map { SKTexture(image: $0) }
         }
     }
-    override func selectedAnimation() {}
+    
+    
+    override func selectedAnimation() {
+        if let texture = texture {
+          fillTexture = texture
+        }
+    }
+    
+    
     override func deselectedAnimation() {}
 }
+

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 enum ActiveTab {
     
@@ -29,6 +30,9 @@ class MainModel: ObservableObject {
     
     // Data
     @Published var activeUsers: Int = 0
+    @Published var connectedMatch: String = ""
+    
+    @Published var showChat: Bool = false 
     
     
     //Popups

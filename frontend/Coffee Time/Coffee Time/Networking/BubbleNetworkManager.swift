@@ -9,37 +9,6 @@ import SwiftUI
 import Combine
 import Starscream
 
-struct UserModel: Codable {
-    var event: String
-    var data: UserData
-    
-    struct UserData: Codable {
-        var UUID: String
-    }
-}
-
-
-struct UserInterestModel: Codable {
-    var event: String
-    var data: UserData
-    
-    struct UserData: Codable {
-        var ITRS: [String]
-    }
-}
-
-
-struct EmployeeModel: Codable {
-    var status: String
-    var event: String
-    var data: EmployeeData
-    
-    struct EmployeeData: Codable {
-        var list: [String]
-    }
-}
-
-
 class BubbleNetworkManager {
     
     static let shared = BubbleNetworkManager()
@@ -79,14 +48,8 @@ extension BubbleNetworkManager: WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             print("Received text: \(string)")
-            let decoder = JSONDecoder()
-            
-            do {
-                let employeeModel = try decoder.decode(EmployeeModel.self, from: Data(string.utf8))
-                let newInterests = employeeModel.data.list
-                
-                algorithm(newInterests: newInterests)
-            } catch { print(error) }
+            receiveBubble(string: string)
+            receiveMessage(string: string)
             
         case .cancelled:
             isConnected = false
@@ -126,6 +89,17 @@ extension BubbleNetworkManager: WebSocketDelegate {
     }
     
     
+    func receiveBubble(string: String) {
+        let decoder = JSONDecoder()
+        
+        do {
+            let employeeModel = try decoder.decode(EmployeeModel.self, from: Data(string.utf8))
+            let newInterests = employeeModel.data.list
+            algorithm(newInterests: newInterests)
+        } catch {}
+    }
+    
+    
     func algorithm(newInterests: [String]) {
         
         //New Interests?
@@ -135,12 +109,41 @@ extension BubbleNetworkManager: WebSocketDelegate {
         let deletedOnes = interests.filter { !newInterests.contains($0) }
         
         if !newOnes.isEmpty {
-            newOnes.forEach { shouldAdd.send((name: $0, image: nil)) }
+            newOnes.forEach {
+                var image: UIImage? = nil
+                if InterestThumbnail.interestWithImages.contains($0) {
+                    image = UIImage(named: $0.lowercased())
+                }
+                shouldAdd.send((name: $0, image: image))
+            }
         }
         if !deletedOnes.isEmpty {
             deletedOnes.forEach { shouldDelete.send($0) }
         }
         
         interests = newInterests
+    }
+    
+    
+    //MARK: - Chat
+    
+    func receiveMessage(string: String) {
+        let decoder = JSONDecoder()
+        
+        do {
+            let messageModel = try decoder.decode(ReceiveMessageModel.self, from: Data(string.utf8))
+            ChatHelper.shared.displayReceivedMessage(messageModel: messageModel)
+        } catch {}
+    }
+    
+    
+    func sendMessage(with messageModal: SendMessageModel) {
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(messageModal)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+            self.send(s: jsonString)
+        } catch { print(error) }
     }
 }
