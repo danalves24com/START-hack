@@ -16,7 +16,7 @@ struct MessageContentView: View {
         Text(messageContent)
             .padding(10)
             .foregroundColor(isCurrentUser ? Color.white : Color.black)
-            .background(isCurrentUser ? Color.blue : Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+            .background(isCurrentUser ? CTRandom.generateRandomColor() : CTColor.background)
             .cornerRadius(10)
     }
 }

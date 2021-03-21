@@ -84,14 +84,14 @@ extension BubbleVC: BubbleProtocol {
         var node: Node
         
         if let image = image {
-            node = ImageNode(text: name, image: image, color: .white, radius: 45)
+            node = ImageNode(text: name, image: image, color: .white, radius: 55)
             node.selectedAnimation()
         } else {
             let color = UIColor(CTRandom.generateRandomColor())
-            node = Node(text: name, image: nil, color: color, radius: 45)
+            node = Node(text: name, image: nil, color: color, radius: 55)
         }
         
-        node.fontName = "Montserrat-SemiBold"
+        node.fontName = "Montserrat-Bold"
         node.fontSize = 16
         node.name = name
         magnetic?.addChild(node)

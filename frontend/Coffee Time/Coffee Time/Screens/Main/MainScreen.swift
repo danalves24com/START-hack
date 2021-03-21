@@ -21,7 +21,7 @@ struct MainScreen: View {
                 ChatView()
                 
             } else {
-                if UserDefaultsManager.shared.firstStart {
+                if !mainModel.tokenSuccess {
                     RegistrationScreen()
                 } else {
                     VStack {

@@ -15,6 +15,11 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
+            VStack {
+                CTText(text: "Guitar", font: .custom(.semiBold, 24))
+                CTText(text: "Paula", font: .custom(.regular, 15))
+            }
+            .frame(minHeight: CGFloat(50)).padding()
            ScrollView {
                 ForEach(chatHelper.messages ){ msg in
                   MessageView(currentMessage: msg)

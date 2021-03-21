@@ -32,7 +32,8 @@ class MainModel: ObservableObject {
     @Published var activeUsers: Int = 0
     @Published var connectedMatch: String = ""
     
-    @Published var showChat: Bool = false 
+    @Published var showChat: Bool = false
+    @Published var tokenSuccess: Bool = !UserDefaultsManager.shared.firstStart
     
     
     //Popups

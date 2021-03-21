@@ -28,6 +28,7 @@ struct RegistrationScreen: View {
                             print("Failed with Error \(error.message)")
                         case let .success(token):
                             if token.auth == "success" {
+                                MainModel.shared.tokenSuccess = true
                                 UserDefaultsManager.shared.firstStart = false
                                 UserDefaultsManager.shared.company_uid = token.data.company_uid
                                 UserDefaultsManager.shared.user_uuid = token.data.uuid
