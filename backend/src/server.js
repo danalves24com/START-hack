@@ -86,7 +86,7 @@ var server = ws.createServer(function (conn) {
 				cli.setITRS(str["data"]["ITRS"])			
 				broadcast(JSON.stringify(getAllAvalibleInterests()));
 				break;
-			case "send_to":
+] = nullcase "send_to":
 				var id = str["data"]["to"], payload = str["data"]["from"];			
 				console.log("sending message to "+id);
 				var message = {"event":"com_rec", "data":{"origin":cli.getUUID(), "message":payload}}
@@ -105,19 +105,7 @@ var server = ws.createServer(function (conn) {
 		for(var e in pool) {
 			console.log(" ++ "+e)
 		}
-		delete pool[cli.getUUID];	
-		broadcast(JSON.stringify(getAllAvalibleInterests()));
-		for(var e in pool) {
-			console.log(" -- "+e)
-		}
-	})
-	conn.on("error", function(err){
-		
-
-		for(var e in pool) {
-			console.log(" ++ "+e)
-		}
-		delete pool[cli.getUUID];	
+		pool[cli.getUUID] = null
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 		for(var e in pool) {
 			console.log(" -- "+e)
@@ -202,14 +190,18 @@ function getAllAvalibleInterests() {
 	var all = []
 	for(var c in pool) {
 		c=pool[c]
-		console.log(c);
-		c=c.getITRS()	
-		for(var i in c) {
-			i = c[i]
-			if(!all.includes(i)) {
-				all.push(i);	
-			}
-		}	
+		if(c!=null) {		
+			console.log(c);
+			c=c.getITRS()	
+			for(var i in c) {
+				i = c[i]
+				if(!all.includes(i)) {
+					all.push(i);	
+				}
+			}	
+		}else {
+			
+		}
 	} 
 	var size = Object.keys(pool).length;
 	return {"status":"success", "event":"update_buble", "data": {"list":all,"size":size}}
