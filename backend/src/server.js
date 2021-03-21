@@ -193,11 +193,12 @@ app.get("/get/all-connected", (req, res) => {
 
 function getAllAvalibleInterests() {
 
-
+	var count = 0;
 	var all = []
 	for(var c in pool) {
 		c=pool[c]
 		if(c!=null) {		
+			count += 1;
 			console.log(c);
 			c=c.getITRS()	
 			for(var i in c) {
@@ -209,9 +210,8 @@ function getAllAvalibleInterests() {
 		}else {
 			
 		}
-	} 
-	var size = Object.keys(pool).length;
-	return {"status":"success", "event":"update_buble", "data": {"list":all,"size":size}}
+	} 	
+	return {"status":"success", "event":"update_buble", "data": {"list":all,"size":count}}
 }
 
 
