@@ -15,6 +15,7 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
+            Text("Paula, Nature") //For later add Name and Topic here dynamically
            ScrollView {
                 ForEach(chatHelper.messages ){ msg in
                   MessageView(currentMessage: msg)
