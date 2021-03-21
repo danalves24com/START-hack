@@ -43,9 +43,11 @@ class Matcher {
 		})
 		var sql = `select * from company_members_${this.cc}`
 		var uidOG = this.id;
+		var all = []
 		var bestMatchScore = 0, bestMatchUUID = "";
 		this.con.query(sql, (e, r, f) => {
 		//	console.log(r);
+			all = r;
 			for(var u in r) {				
 				u = r[u]
 				if(u.UUID != uidOG) {
@@ -70,7 +72,14 @@ class Matcher {
 				res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
 			}
 			else {
-				res.json({"status":"fail"})
+				if(all.length > 0) {
+					var index = Math.floor(Math.random() * (all.length + 1)); 
+					var profile = all[index];
+					var matchID = profile.UUID;
+					res.json({"status":"success", "data":{"bestMatch":matchID}})
+				} else {
+					res.json({"status":"fail"})
+				}
 			}
 		})
 
