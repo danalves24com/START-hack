@@ -9,7 +9,7 @@ var pass = require("./config/pass.js")
 var ws = require("nodejs-websocket")
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  user: "daniel.rosel",
   password: pass,
   database: 'coffee_time',
   port: 3306,
@@ -87,7 +87,7 @@ var server = ws.createServer(function (conn) {
 				broadcast(JSON.stringify(getAllAvalibleInterests()));
 				break;
 			case "send_to":
-				var id = str["data"]["to"], payload = str["data"]["from"];			
+				var id = str["data"]["to"], payload = str["data"]["msg"];			
 				console.log("sending message to "+id);
 				var message = {"event":"com_rec", "data":{"origin":cli.getUUID(), "message":payload}}
 				var target = null;
@@ -109,10 +109,13 @@ var server = ws.createServer(function (conn) {
         	console.log("Connection closed")		
 
 		for(var e in pool) {
+		
 			var ps = e;
-			e = pool[e];		
-			if(e.getUUID() == cli.getUUID()) {
-				pool[ps] = null;
+			e = pool[e];
+			if(e != null) {
+				if(e.getUUID() == cli.getUUID()) {
+					pool[ps] = null;
+				}
 			}
 		}	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
