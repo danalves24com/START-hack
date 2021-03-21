@@ -105,7 +105,7 @@ var server = ws.createServer(function (conn) {
 		for(var e in pool) {
 			console.log(" ++ "+e)
 		}
-		delete pool[cli.getUUID}];	
+		delete pool[cli.getUUID];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 		for(var e in pool) {
 			console.log(" -- "+e)
@@ -113,10 +113,11 @@ var server = ws.createServer(function (conn) {
 	})
 	conn.on("error", function(err){
 		
+
 		for(var e in pool) {
 			console.log(" ++ "+e)
 		}
-		delete pool[`${cli.getUUID}`];	
+		delete pool[cli.getUUID];	
 		broadcast(JSON.stringify(getAllAvalibleInterests()));
 		for(var e in pool) {
 			console.log(" -- "+e)
