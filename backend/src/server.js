@@ -86,6 +86,7 @@ var server = ws.createServer(function (conn) {
 				cli.setITRS(str["data"]["ITRS"])			
 				broadcast(JSON.stringify(getAllAvalibleInterests()));
 				break;
+
 			case "send_to":
 				var id = str["data"]["to"], payload = str["data"]["msg"];			
 				console.log("sending message to "+id);
@@ -94,7 +95,7 @@ var server = ws.createServer(function (conn) {
 				for(var p in pool) {
 					p = pool[p]
 					if(p!=null){
-						if(p.getUUID() == cli.getUUID()) {
+						if(p.getUUID() == id) {
 							target = p.getCON();
 						}
 					} else {}
