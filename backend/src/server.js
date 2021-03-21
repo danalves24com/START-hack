@@ -47,7 +47,9 @@ function broadcast(data) {
 		user = pool[user]
 		if(user != null) {
 			var cn = user.getCON();
-			cn.sendText(data);
+			if(cn.readyState == 1) {
+				cn.sendText(data);
+			}
 		}
 	}
 }
