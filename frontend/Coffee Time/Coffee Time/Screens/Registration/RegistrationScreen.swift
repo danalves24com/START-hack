@@ -28,7 +28,6 @@ struct RegistrationScreen: View {
                             print("Failed with Error \(error.message)")
                         case let .success(token):
                             if token.auth == "success" {
-                                MainModel.shared.tokenSuccess = true
                                 UserDefaultsManager.shared.firstStart = false
                                 UserDefaultsManager.shared.company_uid = token.data.company_uid
                                 UserDefaultsManager.shared.user_uuid = token.data.uuid
@@ -37,6 +36,10 @@ struct RegistrationScreen: View {
                                 print(token.data.company_uid)
                                 print(token.data.uuid)
                                 print(token.data.interests)
+                                
+                                DispatchQueue.main.async {
+                                    MainModel.shared.tokenSuccess = true
+                                }
                             }
                         }
                     }
