@@ -14,7 +14,7 @@ class Matcher {
 
 	var con = mysql.createConnection({
 	  host: "localhost",
-	  user: "root",
+	  user: "daniel.rosel",
 	  password: "Saniroot1678",
 	  database: "coffee_time",
 	  port: 3306,
