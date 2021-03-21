@@ -68,12 +68,9 @@ function updateView() {
 }
 
 var server = ws.createServer(function (conn) {
-	var cli = null;
-	conn.on("connect", function(){		
-		console.log("New connection")
-	    	cli = new client(conn)
-		broadcast(JSON.stringify(updateView()));
-	})
+	var cli = new client(conn)
+	console.log("New connection")
+	broadcast(JSON.stringify(updateView()));
 	conn.on("text", function (str) {
 		str = JSON.parse(str);
 		console.log(str);
