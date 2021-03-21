@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct Coffee_TimeApp: App {
+    
+    let mainModel = MainModel.shared
+    let chatHelper = ChatHelper.shared
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainScreen()
         }
     }
 }

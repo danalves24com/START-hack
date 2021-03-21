@@ -1,5 +1,5 @@
 //
-//  MainScreen.swift
+//  TopicsModel.swift
 //  Coffee Time
 //
 //  Created by Kai Zheng on 20.03.21.
