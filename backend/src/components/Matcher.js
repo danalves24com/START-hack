@@ -14,8 +14,8 @@ class Matcher {
 
 	var con = mysql.createConnection({
 	  host: "localhost",
-	  user: "root",
-	  password: "Saniroot",
+	  user: "daniel.rosel",
+	  password: "Saniroot1678",
 	  database: "coffee_time",
 	  port: 3306,
 	});
@@ -28,8 +28,8 @@ class Matcher {
 	}
 
 
-	match(res) {
-
+	match(res, pool) {
+		this.pool = pool;
 		var personalInterests = []
 		var sql0 = `select * from company_members_${this.cc} where UUID ='${this.id}'`
 		console.log(sql0)
@@ -43,9 +43,11 @@ class Matcher {
 		})
 		var sql = `select * from company_members_${this.cc}`
 		var uidOG = this.id;
+		var all = []
 		var bestMatchScore = 0, bestMatchUUID = "";
 		this.con.query(sql, (e, r, f) => {
 		//	console.log(r);
+			all = r;
 			for(var u in r) {				
 				u = r[u]
 				if(u.UUID != uidOG) {
@@ -67,14 +69,47 @@ class Matcher {
 				}
 			}
 			if(bestMatchScore > 0) {
-				res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
+				if(this.matchIsOnline(bestMatchUUID)) {
+					res.json({"status":"success", "data":{"bestMatch":bestMatchUUID}})
+				}
+				else {
+						res.json({"status":"fail", "reason": "no match found"})
+				}
 			}
 			else {
-				res.json({"status":"fail"})
+				if(all.length > 0) {
+					var index = Math.floor(Math.random() * (all.length + 1)); 
+					var profile = all[index];
+					var matchID = profile.UUID;
+					if(this.matchIsOnline(matchID)) {					
+						res.json({"status":"success", "data":{"bestMatch":matchID}})
+					}
+					else {
+						res.json({"status":"fail", "reason": "no match found"})
+					}
+				} else {
+					res.json({"status":"fail"})
+				}
 			}
 		})
 
 	}
+
+
+	matchIsOnline(bestMatchUUID) {	
+		var pool = this.pool;
+			var matchIsOnline = false;
+			for(var user in pool) {				
+				user = pool[user]
+				if(user!=null) {
+					if(user.getUUID() == bestMatchUUID) {
+						matchIsOnline = true;
+					}
+				}
+			}
+			return matchIsOnline;
+	}
+
 	randomMatch() {
 		return "randomly matched " + this.id;
 	}
